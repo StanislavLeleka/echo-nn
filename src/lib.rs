@@ -1,14 +1,15 @@
 mod error;
-mod operation;
+mod layers;
+mod operations;
 mod regression;
 mod utils;
 
 #[cfg(test)]
 mod tests {
-    use crate::operation::bias_add::BiasAdd;
-    use crate::operation::operation::Operation;
-    use crate::operation::sigmoid::Sigmoid;
-    use crate::operation::weight_multiply::WeightMultiply;
+    use crate::operations::bias_add::BiasAdd;
+    use crate::operations::operation::Operation;
+    use crate::operations::sigmoid::Sigmoid;
+    use crate::operations::weight_multiply::WeightMultiply;
     use ndarray::Array2;
 
     #[test]

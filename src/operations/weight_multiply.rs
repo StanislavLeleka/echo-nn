@@ -1,9 +1,9 @@
-use crate::operation::operation::Operation;
+use crate::operations::operation::Operation;
 use ndarray::Array2;
 
 pub struct WeightMultiply {
     pub weights: Array2<f64>,
-    pub wight_grads: Option<Array2<f64>>,
+    pub weight_grads: Option<Array2<f64>>,
     pub input: Option<Array2<f64>>,
 }
 
@@ -12,7 +12,7 @@ impl WeightMultiply {
         Self {
             weights,
             input: None,
-            wight_grads: None,
+            weight_grads: None,
         }
     }
 }
@@ -33,8 +33,15 @@ impl Operation for WeightMultiply {
         let weights_grad = input_ref.t().dot(&output_grad);
 
         // Save the weights gradient for parameter updates
-        self.wight_grads = Some(weights_grad);
+        self.weight_grads = Some(weights_grad);
 
         Ok(input_grad)
+    }
+
+    fn param_grads(&self) -> Vec<Array2<f64>> {
+        match &self.weight_grads {
+            Some(grads) => vec![grads.clone()],
+            None => vec![],
+        }
     }
 }

@@ -1,4 +1,4 @@
-use crate::operation::operation::Operation;
+use crate::operations::operation::Operation;
 use ndarray::Array2;
 
 pub struct Sigmoid {
@@ -28,5 +28,9 @@ impl Operation for Sigmoid {
         // Element-wise multiplication of sigmoid_grad and output_grad
         let input_grad = sigmoid_grad * &output_grad;
         Ok(input_grad)
+    }
+
+    fn param_grads(&self) -> Vec<Array2<f64>> {
+        vec![]
     }
 }

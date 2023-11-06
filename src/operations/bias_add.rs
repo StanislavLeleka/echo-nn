@@ -1,4 +1,4 @@
-use crate::operation::operation::Operation;
+use crate::operations::operation::Operation;
 use ndarray::{Array2, Axis};
 
 pub struct BiasAdd {
@@ -29,5 +29,12 @@ impl Operation for BiasAdd {
         // Save the biases gradient for parameter updates
         self.biases_grad = Some(biases_grad);
         Ok(output_grad) // The gradient doesn't change with respect to the biases
+    }
+
+    fn param_grads(&self) -> Vec<Array2<f64>> {
+        match &self.biases_grad {
+            Some(grads) => vec![grads.clone()],
+            None => vec![],
+        }
     }
 }
