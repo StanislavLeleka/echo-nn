@@ -1,5 +1,7 @@
 mod error;
 mod layers;
+mod loss;
+mod nn;
 mod operations;
 mod regression;
 mod utils;
