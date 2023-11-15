@@ -6,6 +6,16 @@ use ndarray::Array2;
 use ndarray_rand::rand_distr::Normal;
 use rand::distributions::Distribution;
 
+#[macro_export]
+macro_rules! dense_layer {
+    ($input_size:expr, $activation:ty) => {{
+        Rc::new(RefCell::new(Dense::new(
+            $input_size,
+            Box::new(<$activation>::new()),
+        )))
+    }};
+}
+
 pub struct Dense {
     neurons: usize,
     first: bool,

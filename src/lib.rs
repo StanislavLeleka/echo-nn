@@ -3,6 +3,7 @@ mod layers;
 mod loss;
 mod nn;
 mod operations;
+mod optimizer;
 mod regression;
 mod utils;
 
